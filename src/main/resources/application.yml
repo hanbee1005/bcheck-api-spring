@@ -9,4 +9,7 @@ spring:
 server:
   servlet:
     context-path: /app
+    encoding:
+      charset: UTF-8
+      enabled: true
   port: 9090
