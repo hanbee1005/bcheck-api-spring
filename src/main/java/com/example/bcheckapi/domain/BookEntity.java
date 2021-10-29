@@ -3,6 +3,8 @@ package com.example.bcheckapi.domain;
 import com.example.bcheckapi.dto.BookRegisterRequest;
 import com.example.bcheckapi.model.BookInfo;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,7 +17,7 @@ import java.util.Date;
 @Table(name = "books")
 public class BookEntity {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
@@ -56,11 +58,13 @@ public class BookEntity {
     @Column(name = "del_msg")
     private String delMsg;
 
-    @Column(name = "createdAt")
-    private Date createDate;
+    @Column(name = "\"createdAt\"")
+    @CreatedDate
+    private Date createdAt;
 
-    @Column(name = "updatedAt")
-    private Date updateDate;
+    @Column(name = "\"updatedAt\"")
+    @LastModifiedDate
+    private Date updatedAt;
 
     @Builder
     public BookEntity(BookRegisterRequest req) {
@@ -79,5 +83,7 @@ public class BookEntity {
         ownerEmail = req.getEmail();
         ownerName = req.getName();
         delYn = "N";
+        createdAt = new Date();
+        updatedAt = new Date();
     }
 }
