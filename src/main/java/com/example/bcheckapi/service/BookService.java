@@ -2,9 +2,15 @@ package com.example.bcheckapi.service;
 
 import com.example.bcheckapi.domain.BookEntity;
 import com.example.bcheckapi.dto.BookRegisterRequest;
+import com.example.bcheckapi.dto.BookSearchResponse;
 import com.example.bcheckapi.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 @AllArgsConstructor
@@ -14,10 +20,33 @@ public class BookService {
 
     /**
      * 도서 보유자 조건 조회
-     * @param word (도서명 or 저자명 or isbn)
+     * @param word (도서명 or isbn)
      */
-    public void searchBookList(String word) {
+    public List<BookSearchResponse> searchBookList(String word) {
+        try {
+            List<BookEntity> bookEntities = bookRepository.searchAllByWord(word);
+            return makeBookWithOwners(bookEntities);
+        } catch(Exception e) {
+            // TODO: error throw 방식 적용...
+            e.printStackTrace();
+            return null;
+        }
+    }
 
+    private List<BookSearchResponse> makeBookWithOwners(List<BookEntity> books) {
+        Map<String, BookSearchResponse> map = new HashMap<>();
+        for (BookEntity book : books) {
+            BookSearchResponse response;
+            if (map.containsKey(book.getIsbn())) {
+                response = map.get(book.getIsbn());
+                response.addOwner(book);
+            } else {
+                response = new BookSearchResponse(book);
+            }
+            map.put(book.getIsbn(), response);
+        }
+
+        return new ArrayList<>(map.values());
     }
 
     // 내 도서 조회
