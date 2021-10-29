@@ -1,6 +1,6 @@
 package com.example.bcheckapi.domain;
 
-import com.example.bcheckapi.dto.BookOwnerRegisterRequest;
+import com.example.bcheckapi.dto.BookRegisterRequest;
 import com.example.bcheckapi.model.BookInfo;
 import lombok.*;
 
@@ -12,9 +12,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "bookown")
-public class BookOwnEntity {
-
+@Table(name = "books")
+public class BookEntity {
     @Id
     @GeneratedValue
     private Long id;
@@ -39,14 +38,11 @@ public class BookOwnEntity {
 
     private String description;
 
-    @Column(name = "owner_id")
-    private String ownerId;
+    @Column(name = "owner_email")
+    private String ownerEmail;
 
-    @Column(name = "owner_nm")
-    private String ownerNm;
-
-    @Column(name = "own_date")
-    private Date ownDate;
+    @Column(name = "owner_name")
+    private String ownerName;
 
     @Column(name = "del_yn")
     private String delYn;
@@ -54,14 +50,20 @@ public class BookOwnEntity {
     @Column(name = "del_cd")
     private String delCd;
 
+    @Column(name = "del_nm")
+    private String delNm;
+
     @Column(name = "del_msg")
     private String delMsg;
 
-    @Column(name = "update_date")
+    @Column(name = "createdAt")
+    private Date createDate;
+
+    @Column(name = "updatedAt")
     private Date updateDate;
 
     @Builder
-    public BookOwnEntity(BookOwnerRegisterRequest req) {
+    public BookEntity(BookRegisterRequest req) {
         BookInfo bookInfo = req.getBookInfo();
         title = bookInfo.getTitle();
         link = bookInfo.getLink();
@@ -74,9 +76,8 @@ public class BookOwnEntity {
         isbn = bookInfo.getIsbn();
         description = bookInfo.getDescription();
 
-        ownerId = req.getEmail();
-        ownerNm = req.getName();
-        ownDate = new Date();
+        ownerEmail = req.getEmail();
+        ownerName = req.getName();
         delYn = "N";
     }
 }
