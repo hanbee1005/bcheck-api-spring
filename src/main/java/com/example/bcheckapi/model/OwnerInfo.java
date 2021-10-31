@@ -22,8 +22,6 @@ public class OwnerInfo {
 
     private String delMsg;
 
-    private String ownDate;
-
     private String delDate;
 
     public OwnerInfo(BookEntity book) {
@@ -34,7 +32,6 @@ public class OwnerInfo {
         this.delCd = book.getDelCd();
         this.delNm = book.getDelNm();
         this.delMsg = book.getDelMsg();
-        this.ownDate = dateToString(book.getUpdatedAt());
         this.delDate = "Y".equals(book.getDelYn()) ? dateToString(book.getUpdatedAt()) : null;
     }
 
