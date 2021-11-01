@@ -1,16 +1,14 @@
 package com.example.bcheckapi.service;
 
 import com.example.bcheckapi.domain.BookEntity;
+import com.example.bcheckapi.dto.BookOwnerChangeRequest;
 import com.example.bcheckapi.dto.BookRegisterRequest;
 import com.example.bcheckapi.dto.BookSearchResponse;
 import com.example.bcheckapi.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -61,6 +59,18 @@ public class BookService {
     }
 
     // 도서 보유자 수정
+    public void changeBookOwner(BookOwnerChangeRequest request) {
+        try {
+            // 도서 찾기 by id
+            bookRepository.findById(request.getId()).ifPresent(book -> {
+                // book owner 변경
+                book.setOwnerEmail(request.getOwnerEmail());
+                book.setOwnerName(request.getOwnerName());
+            });
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     // 도서 보유자 삭제 (삭제 여부 수정)
 }

@@ -1,6 +1,7 @@
 package com.example.bcheckapi.service;
 
 import com.example.bcheckapi.domain.BookEntity;
+import com.example.bcheckapi.dto.BookOwnerChangeRequest;
 import com.example.bcheckapi.dto.BookRegisterRequest;
 import com.example.bcheckapi.dto.BookSearchResponse;
 import com.example.bcheckapi.model.BookInfo;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -122,5 +124,27 @@ class BookServiceTest {
 
         assertThat(bookListWithIsbnWord.size()).isEqualTo(1);
         assertThat(bookListWithIsbnWord.get(0).getIsbn()).isEqualTo("8960777331 9788960777330");
+    }
+
+    @Test
+    @DisplayName("도서 소유자 변경")
+    void changeBookOwner() {
+        // Given
+        List<BookEntity> books = bookRepository.findAll();
+        Long id = books.get(0).getId();
+
+        BookOwnerChangeRequest request = new BookOwnerChangeRequest();
+        request.setId(id);
+        request.setOwnerEmail("test3@gmail.com");
+        request.setOwnerName("테스터3");
+
+        // When
+        bookService.changeBookOwner(request);
+
+        // Then
+        BookEntity book = bookRepository.findById(id).orElse(null);
+        assertThat(book).isNotNull();
+        assertThat(book.getOwnerEmail()).isEqualTo(request.getOwnerEmail());
+        assertThat(book.getOwnerName()).isEqualTo(request.getOwnerName());
     }
 }
