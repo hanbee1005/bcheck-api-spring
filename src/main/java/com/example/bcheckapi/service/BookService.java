@@ -62,15 +62,19 @@ public class BookService {
     public void changeBookOwner(BookOwnerChangeRequest request) {
         try {
             // 도서 찾기 by id
-            bookRepository.findById(request.getId()).ifPresent(book -> {
+            BookEntity book = bookRepository.findByIdAndDelYn(request.getId(), "N");
+            if (book != null) {
                 // book owner 변경
                 book.setOwnerEmail(request.getOwnerEmail());
                 book.setOwnerName(request.getOwnerName());
-            });
+            }
         } catch(Exception e) {
             e.printStackTrace();
         }
     }
 
     // 도서 보유자 삭제 (삭제 여부 수정)
+    public void removeBook() {
+
+    }
 }

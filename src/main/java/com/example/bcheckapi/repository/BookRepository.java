@@ -11,4 +11,6 @@ public interface BookRepository extends JpaRepository<BookEntity, Long> {
 
     @Query("SELECT b FROM BookEntity b where b.title like %:word% or b.isbn like %:word%")
     List<BookEntity> searchAllByWord(@Param("word") String word);
+
+    BookEntity findByIdAndDelYn(Long id, String delYn);
 }
