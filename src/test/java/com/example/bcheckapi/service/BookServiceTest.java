@@ -6,6 +6,7 @@ import com.example.bcheckapi.dto.BookRegisterRequest;
 import com.example.bcheckapi.dto.BookRemoveRequest;
 import com.example.bcheckapi.dto.BookSearchResponse;
 import com.example.bcheckapi.model.BookInfo;
+import com.example.bcheckapi.model.SearchedBook;
 import com.example.bcheckapi.repository.BookRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -113,18 +114,18 @@ class BookServiceTest {
         String isbnWord = "9788960777330";
 
         // When
-        List<BookSearchResponse> bookListWithEmptyWord = bookService.searchBookList(emptyWord);
-        List<BookSearchResponse> bookListWithTitleWord = bookService.searchBookList(titleWord);
-        List<BookSearchResponse> bookListWithIsbnWord = bookService.searchBookList(isbnWord);
+        BookSearchResponse bookListWithEmptyWord = bookService.searchBookList(emptyWord);
+        BookSearchResponse bookListWithTitleWord = bookService.searchBookList(titleWord);
+        BookSearchResponse bookListWithIsbnWord = bookService.searchBookList(isbnWord);
 
         // Then
-        assertThat(bookListWithEmptyWord.size()).isEqualTo(2);
+        assertThat(bookListWithEmptyWord.getBooks().size()).isEqualTo(2);
 
-        assertThat(bookListWithTitleWord.size()).isEqualTo(1);
-        assertThat(bookListWithTitleWord.get(0).getTitle()).isEqualTo("토비의 스프링 3.1 세트 (스프링의 이해와 원리 + 스프링의 기술과 선택, 전2권)");
+        assertThat(bookListWithTitleWord.getBooks().size()).isEqualTo(1);
+        assertThat(bookListWithTitleWord.getBooks().get(0).getTitle()).isEqualTo("토비의 스프링 3.1 세트 (스프링의 이해와 원리 + 스프링의 기술과 선택, 전2권)");
 
-        assertThat(bookListWithIsbnWord.size()).isEqualTo(1);
-        assertThat(bookListWithIsbnWord.get(0).getIsbn()).isEqualTo("8960777331 9788960777330");
+        assertThat(bookListWithIsbnWord.getBooks().size()).isEqualTo(1);
+        assertThat(bookListWithIsbnWord.getBooks().get(0).getIsbn()).isEqualTo("8960777331 9788960777330");
     }
 
     @Test
