@@ -3,6 +3,7 @@ package com.example.bcheckapi.service;
 import com.example.bcheckapi.domain.BookEntity;
 import com.example.bcheckapi.dto.BookOwnerChangeRequest;
 import com.example.bcheckapi.dto.BookRegisterRequest;
+import com.example.bcheckapi.dto.BookRemoveRequest;
 import com.example.bcheckapi.dto.BookSearchResponse;
 import com.example.bcheckapi.model.BookInfo;
 import com.example.bcheckapi.repository.BookRepository;
@@ -146,5 +147,28 @@ class BookServiceTest {
         assertThat(book).isNotNull();
         assertThat(book.getOwnerEmail()).isEqualTo(request.getOwnerEmail());
         assertThat(book.getOwnerName()).isEqualTo(request.getOwnerName());
+    }
+
+    @Test
+    @DisplayName("도서 삭제 여부 변경")
+    void removeBook() {
+        // Given
+        List<BookEntity> books = bookRepository.findAll();
+        Long id = books.get(0).getId();
+
+        BookRemoveRequest request = new BookRemoveRequest();
+        request.setId(id);
+        request.setDelCd("D01");
+        request.setDelNm("분실");
+        request.setDelMsg(null);
+
+        // When
+        bookService.removeBook(request);
+
+        // Then
+        BookEntity book = bookRepository.findById(id).orElse(null);
+        assertThat(book).isNotNull();
+        assertThat(book.getDelYn()).isEqualTo("Y");
+        assertThat(book.getDelCd()).isEqualTo(request.getDelCd());
     }
 }

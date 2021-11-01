@@ -3,6 +3,7 @@ package com.example.bcheckapi.service;
 import com.example.bcheckapi.domain.BookEntity;
 import com.example.bcheckapi.dto.BookOwnerChangeRequest;
 import com.example.bcheckapi.dto.BookRegisterRequest;
+import com.example.bcheckapi.dto.BookRemoveRequest;
 import com.example.bcheckapi.dto.BookSearchResponse;
 import com.example.bcheckapi.repository.BookRepository;
 import lombok.AllArgsConstructor;
@@ -74,7 +75,18 @@ public class BookService {
     }
 
     // 도서 보유자 삭제 (삭제 여부 수정)
-    public void removeBook() {
-
+    public void removeBook(BookRemoveRequest request) {
+        try {
+            BookEntity book = bookRepository.findByIdAndDelYn(request.getId(), "N");
+            if (book != null) {
+                // book 삭제 여부 수정
+                book.setDelYn("Y");
+                book.setDelCd(request.getDelCd());
+                book.setDelNm(request.getDelNm());
+                book.setDelMsg(request.getDelMsg());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
