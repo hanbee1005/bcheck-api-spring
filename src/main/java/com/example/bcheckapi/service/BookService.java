@@ -6,10 +6,12 @@ import com.example.bcheckapi.model.SearchedBook;
 import com.example.bcheckapi.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 
 @Service
+@Transactional
 @AllArgsConstructor
 public class BookService {
 
