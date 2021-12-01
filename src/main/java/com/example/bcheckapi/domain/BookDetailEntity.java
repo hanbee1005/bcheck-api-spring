@@ -8,12 +8,15 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor
 @Entity
-@Table("book_detail")
+@Table(name = "book_detail")
 public class BookDetailEntity {
 
     @Id
@@ -36,6 +39,9 @@ public class BookDetailEntity {
     private String pubdate;
 
     private String description;
+
+    @OneToMany(mappedBy = "isbn")
+    private List<BookEntity> books = new ArrayList<>();
 
     @Builder
     public BookDetailEntity(BookRegisterRequest req) {
