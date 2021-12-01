@@ -40,7 +40,7 @@ public class BookDetailEntity {
 
     private String description;
 
-    @OneToMany(mappedBy = "isbn")
+    @OneToMany(mappedBy = "bookDetail")
     private List<BookEntity> books = new ArrayList<>();
 
     @Builder

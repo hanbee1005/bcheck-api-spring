@@ -25,7 +25,7 @@ public class MemberEntity {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "email")
+    @OneToMany(mappedBy = "member")
     private List<BookEntity> books = new ArrayList<>();
 
     @Builder
