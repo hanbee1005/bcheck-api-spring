@@ -1,14 +1,17 @@
 package com.example.bcheckapi.domain;
 
+import com.example.bcheckapi.dto.MemberRegisterRequest;
 import com.example.bcheckapi.model.Role;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
+@NoArgsConstructor
 @Entity
 @Table(name = "member")
 public class MemberEntity {
@@ -29,8 +32,12 @@ public class MemberEntity {
     private List<BookEntity> books = new ArrayList<>();
 
     @Builder
-    public MemberEntity() {
+    public MemberEntity(MemberRegisterRequest request) {
+        email = request.getEmail();
+        name = request.getName();
+        password = request.getPassword();
 
+        role = Role.U;
     }
 
     // TODO: 비밀번호 암호화
