@@ -4,13 +4,11 @@ import com.example.bcheckapi.model.Role;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Getter
 @Entity
+@Table(name = "member")
 public class MemberEntity {
 
     @Id
