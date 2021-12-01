@@ -32,7 +32,7 @@ public class MemberService {
 
     // 회원 조회 (이름으로 검색)
     public MemberSearchResponse search(String name) {
-        List<MemberEntity> members = memberRepository.findByName(name);
+        List<MemberEntity> members = memberRepository.findByNameContains(name);
 
         MemberSearchResponse response = new MemberSearchResponse();
 

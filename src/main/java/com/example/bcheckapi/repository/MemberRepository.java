@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface MemberRepository extends JpaRepository<MemberEntity, String> {
 
-    List<MemberEntity> findByName(String name);
+    List<MemberEntity> findByNameContains(String name);
 }
