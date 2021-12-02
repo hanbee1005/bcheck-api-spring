@@ -44,8 +44,7 @@ public class BookDetailEntity {
     private List<BookEntity> books = new ArrayList<>();
 
     @Builder
-    public BookDetailEntity(BookRegisterRequest req) {
-        BookInfo bookInfo = req.getBookInfo();
+    public BookDetailEntity(BookInfo bookInfo) {
         title = bookInfo.getTitle();
         link = bookInfo.getLink();
         image = bookInfo.getImage();
