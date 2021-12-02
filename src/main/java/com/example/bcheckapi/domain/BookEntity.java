@@ -6,12 +6,15 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Getter
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "book")
 public class BookEntity {
 
     @Id
-    private String id;
+    @GeneratedValue
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "email")
@@ -31,7 +34,20 @@ public class BookEntity {
     private String delCd;
 
     @Builder
-    public BookEntity() {
+    public BookEntity(MemberEntity member, BookDetailEntity bookDetail) {
+        setMember(member);
+        setBookDetail(bookDetail);
+        ownDt = new Date();
+    }
 
+    // == 연관관계 메소드 == //
+    public void setMember(MemberEntity member) {
+        this.member = member;
+        member.getBooks().add(this);
+    }
+
+    public void setBookDetail(BookDetailEntity bookDetail) {
+        this.bookDetail = bookDetail;
+        bookDetail.getBooks().add(this);
     }
 }

@@ -19,13 +19,13 @@ public class BookDetailService {
      * @param info
      * @return
      */
-    public String addBookInfo(BookInfo info) {
+    public BookDetailEntity addBookInfo(BookInfo info) {
         if (bookDetailRepository.findById(info.getIsbn()).isEmpty()) {
             BookDetailEntity entity = BookDetailEntity.builder().bookInfo(info).build();
             bookDetailRepository.save(entity);
         }
 
-        return info.getIsbn();
+        return searchBookInfo(info.getIsbn());
     }
 
     /**
@@ -33,13 +33,9 @@ public class BookDetailService {
      * @param isbn
      * @return
      */
-    public BookInfo searchBookInfo(String isbn) {
-        BookDetailEntity searchedBook = bookDetailRepository.findById(isbn).orElse(null);
-
-        if (searchedBook != null) {
-            return BookInfo.builder().entity(searchedBook).build();
-        }
-
-        return null;
+    public BookDetailEntity searchBookInfo(String isbn) {
+        return bookDetailRepository.findById(isbn).orElse(null);
     }
+
+    // 도서명으로 검색
 }
