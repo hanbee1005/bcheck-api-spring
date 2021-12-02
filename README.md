@@ -26,3 +26,6 @@ dependencies {
 ```
 - SwaggerConfig.java 파일 추가 (설정 정보 변경)
 - 서버 실행 후 http://localhost:9090/app/swagger-ui.html 접속
+
+## 주요 이슈 해결
+- JPA 사용 시 Could not extract ResultSet 에러 : https://developerbee.tistory.com/225
