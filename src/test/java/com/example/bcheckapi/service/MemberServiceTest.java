@@ -61,7 +61,7 @@ class MemberServiceTest {
         String name = "김";
 
         // when
-        MemberSearchResponse searchedMember = memberService.search(name);
+        MemberSearchResponse searchedMember = memberService.searchByName(name);
 
         // then
         assertThat(searchedMember.getStatus()).isEqualTo(200);

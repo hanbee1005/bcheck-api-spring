@@ -30,8 +30,12 @@ public class MemberService {
         return request.getEmail();
     }
 
-    // 회원 조회 (이름으로 검색)
-    public MemberSearchResponse search(String name) {
+    /**
+     * 회원 조회 (이름으로 검색)
+     * @param name
+     * @return
+     */
+    public MemberSearchResponse searchByName(String name) {
         List<MemberEntity> members = memberRepository.findByNameContains(name);
 
         MemberSearchResponse response = new MemberSearchResponse();
@@ -46,5 +50,14 @@ public class MemberService {
         }
 
         return response;
+    }
+
+    /**
+     * 회원 조회 (email 검색)
+     * @param email
+     * @return
+     */
+    public MemberEntity searchById(String email) {
+        return memberRepository.findById(email).orElseThrow();
     }
 }
