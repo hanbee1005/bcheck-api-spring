@@ -37,7 +37,7 @@ public class MemberEntity {
         name = request.getName();
         password = request.getPassword();
 
-        role = Role.U;
+        role = Role.USER;
     }
 
     // TODO: 비밀번호 암호화
