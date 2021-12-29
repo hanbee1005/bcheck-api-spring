@@ -40,7 +40,7 @@ import org.springframework.context.annotation.Configuration;
 })
 @Configuration
 public class SwaggerConfig {
-    String[] loginPaths = {"/auth/**"};
+    String[] loginPaths = {"/api/auth/**"};
     String[] allPaths = {"/**"};
 
     @Bean
