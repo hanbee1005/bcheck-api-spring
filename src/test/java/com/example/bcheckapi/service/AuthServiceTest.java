@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 @Transactional
-class MemberServiceTest {
+class AuthServiceTest {
 
     @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;

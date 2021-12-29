@@ -4,7 +4,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@Tag(name = "[001] 도서 관리(도서 조회, 추가, 수정, 삭제)", description = "도서 조회, 추가, 수정, 삭제")
+@Tag(name = "[002] 도서 관리(도서 조회, 추가, 수정, 삭제)", description = "도서 조회, 추가, 수정, 삭제")
 @RestController
 @RequestMapping("/api/books")
 @AllArgsConstructor
