@@ -5,6 +5,7 @@ import com.example.bcheckapi.dto.MemberRegisterRequest;
 import com.example.bcheckapi.dto.MemberSearchResponse;
 import com.example.bcheckapi.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,6 +17,7 @@ import java.util.List;
 public class MemberService {
 
     private final MemberRepository memberRepository;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 회원 가입
@@ -23,11 +25,17 @@ public class MemberService {
      * @return
      */
     public String register(MemberRegisterRequest request) {
-        // TODO: 비밀번호 암호화 설정
-        MemberEntity memberEntity = MemberEntity.builder().request(request).build();
+        MemberEntity memberEntity = MemberEntity.builder()
+                .request(request)
+                .passwordEncoder(passwordEncoder)
+                .build();
         memberRepository.save(memberEntity);
 
         return request.getEmail();
+    }
+
+    public String login() {
+        return "";
     }
 
     /**

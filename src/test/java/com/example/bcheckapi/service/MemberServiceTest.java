@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +25,7 @@ class MemberServiceTest {
 
     @Autowired MemberService memberService;
     @Autowired MemberRepository memberRepository;
+    @Autowired PasswordEncoder passwordEncoder;
 
     @BeforeEach
     void init() {
@@ -50,7 +52,10 @@ class MemberServiceTest {
     }
 
     private void saveMember(MemberRegisterRequest request) {
-        MemberEntity member = MemberEntity.builder().request(request).build();
+        MemberEntity member = MemberEntity.builder()
+                .request(request)
+                .passwordEncoder(passwordEncoder)
+                .build();
         memberRepository.save(member);
     }
 

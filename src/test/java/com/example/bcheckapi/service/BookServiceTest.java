@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,7 @@ public class BookServiceTest {
 
     @Autowired BookService bookService;
     @Autowired MemberRepository memberRepository;
+    @Autowired PasswordEncoder passwordEncoder;
 
     @BeforeEach
     void init() {
@@ -33,7 +35,10 @@ public class BookServiceTest {
         request.setName("테스터");
         request.setPassword("1234");
 
-        MemberEntity member = new MemberEntity(request);
+        MemberEntity member = MemberEntity.builder()
+                .request(request)
+                .passwordEncoder(passwordEncoder)
+                .build();
         memberRepository.save(member);
     }
 

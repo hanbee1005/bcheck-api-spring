@@ -5,6 +5,8 @@ import com.example.bcheckapi.model.Role;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -32,13 +34,11 @@ public class MemberEntity {
     private List<BookEntity> books = new ArrayList<>();
 
     @Builder
-    public MemberEntity(MemberRegisterRequest request) {
+    public MemberEntity(MemberRegisterRequest request, PasswordEncoder passwordEncoder) {
         email = request.getEmail();
         name = request.getName();
-        password = request.getPassword();
+        password = passwordEncoder.encode(request.getPassword());
 
         role = Role.USER;
     }
-
-    // TODO: 비밀번호 암호화
 }
