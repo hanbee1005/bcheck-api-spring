@@ -30,9 +30,6 @@ public class BookEntity {
     @Column(name = "del_yn")
     private String delYn;
 
-    @Column(name = "del_cd")
-    private String delCd;
-
     @Builder
     public BookEntity(MemberEntity member, BookDetailEntity bookDetail) {
         setMember(member);
