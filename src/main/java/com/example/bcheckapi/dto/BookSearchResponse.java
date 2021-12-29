@@ -1,6 +1,5 @@
 package com.example.bcheckapi.dto;
 
-import com.example.bcheckapi.domain.BookDetailEntity;
 import com.example.bcheckapi.model.BookInfo;
 import com.example.bcheckapi.model.OwnerInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,8 +22,4 @@ public class BookSearchResponse {
 
     @Schema(description = "소유자 정보")
     private List<OwnerInfo> owners;
-
-    public BookSearchResponse(BookDetailEntity entity) {
-
-    }
 }

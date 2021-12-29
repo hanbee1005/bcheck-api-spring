@@ -11,7 +11,7 @@ public class BookInfo {
     @Schema(description = "제목", example = "토비의 스프링 3.1 세트 (스프링의 이해와 원리 + 스프링의 기술과 선택, 전2권)")
     private String title;
 
-    @Schema(description = "링크", example = "http://book.naver.com/bookdb/book_detail.php?bid=7006516")
+    @Schema(description = "링크", example = "https://book.naver.com/bookdb/book_detail.php?bid=7006516")
     private String link;
 
     @Schema(description = "이미지", example = "https://bookthumb-phinf.pstatic.net/cover/070/065/07006516.jpg?type=m1&udate=20151005")

@@ -29,8 +29,8 @@ public class BookService {
 
     /**
      * 도서 등록
-     * @param request
-     * @return
+     * @param request BookRegisterRequest
+     * @return isbn
      */
     public String addBook(BookRegisterRequest request) {
         MemberEntity memberEntity = memberService.searchById(request.getEmail());
@@ -66,15 +66,13 @@ public class BookService {
 
             List<OwnerInfo> owners = new ArrayList<>();
 
-            details.getBooks().forEach(owner -> {
-                owners.add(OwnerInfo.builder()
-                        .bookId(owner.getId())
-                        .email(owner.getMember().getEmail())
-                        .name(owner.getMember().getName())
-                        .ownDate(owner.getOwnDt())
-                        .delYn(owner.getDelYn())
-                        .build());
-            });
+            details.getBooks().forEach(owner -> owners.add(OwnerInfo.builder()
+                    .bookId(owner.getId())
+                    .email(owner.getMember().getEmail())
+                    .name(owner.getMember().getName())
+                    .ownDate(owner.getOwnDt())
+                    .delYn(owner.getDelYn())
+                    .build()));
 
             res.setOwners(owners);
             response.add(res);

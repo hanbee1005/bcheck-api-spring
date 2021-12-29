@@ -15,8 +15,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @Tag(name = "[002] 도서 관리", description = "도서 조회, 추가, 수정, 삭제")
 @RestController
 @RequestMapping("/api/books")

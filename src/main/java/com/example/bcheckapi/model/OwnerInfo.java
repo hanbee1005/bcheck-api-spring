@@ -20,7 +20,7 @@ public class OwnerInfo {
     @Schema(description = "이름", example = "홍길동")
     private String name;
 
-    @Schema(description = "보유날짜", example = "")
+    @Schema(description = "보유날짜", example = "2021-12-29T02:07:09.446+00:00")
     private Date ownDate;
 
     @Schema(description = "삭제유무", example = "N")
