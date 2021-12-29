@@ -46,17 +46,18 @@ public class BookServiceTest {
     @DisplayName("도서 등록")
     void addBook() {
         // given
-        BookInfo bookInfo = new BookInfo();
-        bookInfo.setTitle("테스트 도서");
-        bookInfo.setLink("https://link");
-        bookInfo.setImage("https://image");
-        bookInfo.setAuthor("아무개");
-        bookInfo.setPrice("15000");
-        bookInfo.setDiscount("0");
-        bookInfo.setPublisher("테스트출판");
-        bookInfo.setPubdate("20211202");
-        bookInfo.setIsbn("9123456789012 3456789012");
-        bookInfo.setDescription("테스트 도서 입니다!");
+        BookInfo bookInfo = BookInfo.builder()
+                .title("테스트 도서")
+                .link("https://link")
+                .image("https://image")
+                .author("아무개")
+                .price("15000")
+                .discount("0")
+                .publisher("테스트출판")
+                .pubdate("20211202")
+                .isbn("9123456789012 3456789012")
+                .description("테스트 도서 입니다!")
+                .build();
 
         String email = "user@gmail.com";
 

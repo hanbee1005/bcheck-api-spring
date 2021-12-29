@@ -1,13 +1,12 @@
 package com.example.bcheckapi.model;
 
-import com.example.bcheckapi.domain.BookDetailEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Schema(description = "도서 정보")
+@Builder
 public class BookInfo {
     @Schema(description = "제목", example = "토비의 스프링 3.1 세트 (스프링의 이해와 원리 + 스프링의 기술과 선택, 전2권)")
     private String title;

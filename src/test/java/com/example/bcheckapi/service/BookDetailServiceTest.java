@@ -75,18 +75,18 @@ class BookDetailServiceTest {
     }
 
     private BookInfo makeBookInfo(String[] book) {
-        BookInfo bookInfo = new BookInfo();
-        bookInfo.setTitle(book[0]);
-        bookInfo.setLink(book[1]);
-        bookInfo.setImage(book[2]);
-        bookInfo.setAuthor(book[3]);
-        bookInfo.setPrice(book[4]);
-        bookInfo.setDiscount(book[5]);
-        bookInfo.setPublisher(book[6]);
-        bookInfo.setPubdate(book[7]);
-        bookInfo.setIsbn(book[8]);
-        bookInfo.setDescription(book[9]);
 
-        return bookInfo;
+        return BookInfo.builder()
+                .title(book[0])
+                .link(book[1])
+                .image(book[2])
+                .author(book[3])
+                .price(book[4])
+                .discount(book[5])
+                .publisher(book[6])
+                .pubdate(book[7])
+                .isbn(book[8])
+                .description(book[9])
+                .build();
     }
 }
