@@ -1,10 +1,7 @@
 package com.example.bcheckapi.service;
 
 import com.example.bcheckapi.domain.MemberEntity;
-import com.example.bcheckapi.dto.MemberLoginRequest;
-import com.example.bcheckapi.dto.MemberLoginResponse;
-import com.example.bcheckapi.dto.MemberRegisterRequest;
-import com.example.bcheckapi.dto.MemberSearchResponse;
+import com.example.bcheckapi.dto.*;
 import com.example.bcheckapi.repository.MemberRepository;
 import com.example.bcheckapi.security.JwtTokenProvider;
 import com.example.bcheckapi.security.UserDetailsImpl;
@@ -34,14 +31,25 @@ public class AuthService {
      * @param request
      * @return
      */
-    public String register(MemberRegisterRequest request) {
+    public boolean register(MemberRegisterRequest request) {
+        // TODO: 이미 있는 회원인지 조회
+        boolean isExisted = checkExistMember(request.getEmail());
+
+        if (isExisted) {
+            return false;
+        }
+
         MemberEntity memberEntity = MemberEntity.builder()
                 .request(request)
                 .passwordEncoder(passwordEncoder)
                 .build();
         memberRepository.save(memberEntity);
 
-        return request.getEmail();
+        return true;
+    }
+
+    private boolean checkExistMember(String email) {
+        return memberRepository.findById(email).isPresent();
     }
 
     /**

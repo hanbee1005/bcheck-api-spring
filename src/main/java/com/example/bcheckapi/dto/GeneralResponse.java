@@ -15,4 +15,7 @@ public class GeneralResponse {
 
     @Schema(description = "응답 메시지", example = "성공")
     private String message;
+
+    @Schema(description = "데이터", example = "")
+    private String data;
 }
