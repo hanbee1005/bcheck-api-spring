@@ -1,8 +1,12 @@
 package com.example.bcheckapi.service;
 
+import com.example.bcheckapi.domain.MemberEntity;
 import com.example.bcheckapi.dto.BookRegisterRequest;
+import com.example.bcheckapi.dto.MemberRegisterRequest;
 import com.example.bcheckapi.model.BookInfo;
+import com.example.bcheckapi.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,6 +24,18 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class BookServiceTest {
 
     @Autowired BookService bookService;
+    @Autowired MemberRepository memberRepository;
+
+    @BeforeEach
+    void init() {
+        MemberRegisterRequest request = new MemberRegisterRequest();
+        request.setEmail("user@gmail.com");
+        request.setName("테스터");
+        request.setPassword("1234");
+
+        MemberEntity member = new MemberEntity(request);
+        memberRepository.save(member);
+    }
 
     @Test
     @DisplayName("도서 등록")
