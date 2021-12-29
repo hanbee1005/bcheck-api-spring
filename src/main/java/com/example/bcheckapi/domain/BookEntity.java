@@ -35,6 +35,7 @@ public class BookEntity {
         setMember(member);
         setBookDetail(bookDetail);
         ownDt = new Date();
+        delYn = "N";
     }
 
     // == 연관관계 메소드 == //

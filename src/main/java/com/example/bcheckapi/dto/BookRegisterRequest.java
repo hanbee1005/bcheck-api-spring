@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @Schema(description = "도서 등록 요청 객체")
 public class BookRegisterRequest {
-    @Schema(description = "소유자 이메일", example = "test1@gmail.com")
+    @Schema(description = "소유자 이메일", example = "user@gmail.com")
     private String email;
 
     @Schema(description = "등록할 도서 정보")
